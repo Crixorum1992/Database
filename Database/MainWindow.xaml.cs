@@ -25,7 +25,7 @@ namespace Database
         public MainWindow()
         {
             InitializeComponent();
-            cn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\Database1.mdb");
+            cn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory| Database1.mdb");
 
         }
 
@@ -42,6 +42,20 @@ namespace Database
             }
         }
 
-   
+        private void Employee_Click(object sender, RoutedEventArgs e)
+        {
+            string query = "select* from Employee";
+            OleDbCommand cmd = new OleDbCommand(query, cn);
+            cn.Open();
+            OleDbDataReader read = cmd.ExecuteReader();
+            string data = "";
+            while (read.Read())
+            {
+                data += read[0].ToString() + "\n";
+            }
+        }
+
+
+
 }
 }
